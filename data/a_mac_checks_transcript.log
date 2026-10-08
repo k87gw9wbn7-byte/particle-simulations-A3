@@ -1,0 +1,20 @@
+Mac Terminal output pasted by the user in this conversation, 2026-10-08.
+Command: sh tests/run_checks.sh
+This is a transcript, not a log redirected by the shell.
+
+PASS pair forces, switches, types, cutoff, periodicity, momentum, conservative-only energy/virial
+Particle 0: Force analytical: (8.36306, 12.5446, 4.18153), Force FD: (8.36306, 12.5446, 4.18153), rel.err=1.42866e-10
+Particle 0: Force analytical: (-0.4, -0.6, -0.2), Force FD: (-0.4, -0.6, -0.2), rel.err=1.4301e-10
+Virial test: analytical W = 5.57414, finite-difference W = 5.57414, rel.err=5.58687e-11
+PASS finite-difference conservative/spring forces, virial, bonded repulsion, zero-length spring
+Noise samples=200000 mean=-0.00111879993 variance=0.997469268
+PASS uniform noise moments
+PASS chains N=1,3,5,10; homogeneous/separated starts; lengths; 50-step dynamics; momentum; neighbour forces vs all pairs
+Uniform integrated g[0] for 0.5<=r<3: 1.00097653
+Uniform integrated g[1] for 0.5<=r<3: 0.999822139
+Uniform integrated g[2] for 0.5<=r<3: 0.999230453
+RDF: 100 frames, 10 blocks, dr=0.02, rmax=3, NA=150, NB=350
+RDF: 1 frames, 1 blocks, dr=0.02, rmax=3, NA=18, NB=42
+PASS RDF all-pairs comparison, force-list independence, ideal uniform normalisation, small-box fallback
+PASS restart round trip
+ALL PART A CHECKS PASSED

@@ -1,0 +1,13 @@
+Updated package verification, 2026-10-08
+PASS all original task cells preserved exactly, including metadata
+PASS all code cells executed against the uploaded Mac data; no error outputs
+PASS notebook answer links resolve inside package
+PASS Mac RDF counts reproduce the three reported integrated g values
+PASS C/header/test-script sources unchanged from previously tested version
+PASS Mac smoke, uniform RDF and small-box outputs retained byte for byte
+PASS no compiled executable in code/
+PASS source-only ZIP layout and ZIP integrity
+Mac build and focused-check success are evidenced by the user's Terminal output.
+OVITO loading/playback confirmed by the user; no equilibrium claim is made.
+Official nb2html.py/check_my_submission.py were not supplied and were not run.
+Parts B-D and group details remain unfinished.

@@ -1,0 +1,26 @@
+User-reported Mac session, 2026-10-08 (Europe/Amsterdam)
+Hardware: MacBook Air, M1 / ARM64
+macOS: 27.0.1 (sw_vers -productVersion)
+The current compiler version was not re-queried after the macOS update.
+
+Commands executed from ~/Downloads/A3_PartA/code:
+gcc -O3 *.c -o dpd -lm
+time ./dpd > ../data/a_smoke_run.log 2> ../data/a_smoke_stderr.log
+tail -n 3 ../data/a_smoke_thermo.csv
+sh tests/run_checks.sh
+
+Shell timing copied from the user's Terminal message:
+3.31s user 0.03s system 86% cpu 3.841 total
+
+Last three saved thermo rows, copied from the user's message:
+900,36,13711.83475,4641.973808,18353.80855,1.0318937,1.036582464,1.026517006
+950,38,13784.66772,4620.473177,18405.1409,1.027114188,1.023376445,1.030167189
+1000,40,13652.07114,4566.170867,18218.242,1.015042985,1.011555087,1.017854187
+
+The Mac run/test output data were uploaded as A3_PartA 2.zip. The test was not
+redirected to a_checks.log, so that file still contains the earlier Linux output.
+The pasted Mac test output is saved separately in a_mac_checks_transcript.log.
+
+OVITO Basic 3.16.1: screenshot shows a_smoke.pdb loaded, frame 0 of 4, two colours,
+four views. User confirmed that particles move during playback. This confirms
+loading/playback, not equilibrium, absence of every defect, or chain validation.
