@@ -1,0 +1,2 @@
+block,frames,beads_per_frame,n_per_component,mean_vx,mean_vy,mean_vz,var_vx,var_vy,var_vz,kT_variance,kT_dof_corrected
+0,2,2,4,0,0,0,1,4,9,4.6666666666666661,9.3333333333333321

@@ -1,0 +1,12 @@
+{
+  "total_steps": 120000,
+  "discard_steps": 20000,
+  "production_steps": 100000,
+  "total_time": 4800.0,
+  "production_frames": 2000,
+  "blocks": 20,
+  "reference_RMSE_over_digitized_range": 0.005948588848262287,
+  "largest_reference_difference_r": 0.6714507097246712,
+  "largest_reference_difference": -0.011758750974929066,
+  "first_vs_second_half_RMS_difference": 0.0012678623874690714
+}

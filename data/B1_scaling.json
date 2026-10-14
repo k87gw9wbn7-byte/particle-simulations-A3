@@ -1,0 +1,14 @@
+{
+  "fit_range_dt": [
+    0.02,
+    0.01,
+    0.005
+  ],
+  "max_error_exponent_smallest_three": 2.7882802490986,
+  "rms_error_exponent_smallest_three": 3.0115567531634406,
+  "pairwise_max_error_exponents": [
+    4.02161864064338,
+    3.9833126601486315,
+    1.5932478380485589
+  ]
+}

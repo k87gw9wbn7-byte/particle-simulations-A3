@@ -14,6 +14,7 @@ double calculate_forces(struct Parameters *p, struct Nbrlist *n, struct Vectors 
 {
     for (size_t i=0; i<p->num_part; ++i) v->f[i] = v3(0,0,0);
     v->press_vir_nb = v->press_vir_bnd = 0;
+    v->virial_diag = v3(0,0,0);
     double U = calculate_forces_bond(p,v) + calculate_forces_nb(p,n,v);
     double threeV = 3.0*p->L.x*p->L.y*p->L.z;
     v->press_vir_nb /= threeV;
@@ -33,6 +34,7 @@ double calculate_forces_bond(struct Parameters *p, struct Vectors *v)
         v->f[j] = v3_sub(v->f[j],f);
         U += 0.5*p->k_bond*v3_dot(rij,rij);
         v->press_vir_bnd += v3_dot(rij,f);
+        v->virial_diag = v3_add(v->virial_diag,v3_mul(rij,f));
     }
     return U;
 }
@@ -59,6 +61,8 @@ double calculate_forces_nb(struct Parameters *p, struct Nbrlist *n, struct Vecto
             fc = a*w;
             U += 0.5*a*p->r_cut*w*w;
             v->press_vir_nb += r*fc; /* C only, never D or R */
+            Vec3D f_conservative = v3_scl(fc,e);
+            v->virial_diag = v3_add(v->virial_diag,v3_mul(rij,f_conservative));
             magnitude += fc;
         }
         if (p->thermostat_on) {

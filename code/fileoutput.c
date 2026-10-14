@@ -66,7 +66,7 @@ void record_trajectories_xyz(int reset, struct Parameters *p_parameters, struct 
     fp_traj = checked_open(filename, "a");
   }
 
-  fprintf(fp_traj, "%lu\n", p_parameters->num_part);
+  fprintf(fp_traj, "%zu\n", p_parameters->num_part);
   fprintf(fp_traj, "time = %f\n", time);
   struct Vec3D *r = p_vectors->r;
   for (size_t i = 0; i < p_parameters->num_part; i++)
@@ -126,10 +126,10 @@ void record_to_csv(int reset, struct Parameters *p_parameters, size_t step, doub
     fclose(fp);
     return;
   }
-  fprintf(fp, "%lu,%.10g,%.10g,%.10g,%.10g,%.10g",
+  fprintf(fp, "%lu,%.17g,%.17g,%.17g,%.17g,%.17g",
           (long unsigned)step, time, Epot, Ekin, Epot + Ekin, T);
   for (int t = 0; t < TYPES; t++)
-    fprintf(fp, ",%.10g", T_type[t]);
+    fprintf(fp, ",%.17g", T_type[t]);
   fprintf(fp, "\n");
   fclose(fp);
 }

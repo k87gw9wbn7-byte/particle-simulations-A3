@@ -141,6 +141,9 @@ struct Parameters
     char filename_pdb[1024], filename_xyz[1024], filename_csv[1024];
     char restart_in_filename[1024], restart_out_filename[1024];
     int analysis_enabled;
+    int velocity_enabled; /* B3: sample completed-step velocity histograms/moments */
+    int slab_enabled; /* C2-C4: profiles and pressure-tensor sampling */
+    double profile_dr;
     size_t equil_steps, sample_steps, block_steps;
     double rdf_max, rdf_dr;
     char analysis_prefix[1024];
@@ -226,6 +229,7 @@ struct Vectors
     struct Bond *bonds;         //!< bonds
     struct Angle *angles;       //!< angles
     struct Dihedral *dihedrals; //!< dihedrals
+    Vec3D virial_diag; /* raw conservative + spring virial, not divided by volume */
     double press_kin;           //!< kinetic (ideal-gas) contribution to the pressure, set in @ref update_velocities_half_dt
     double press_vir_nb;        //!< non-bonded virial contribution to the pressure, set in @ref calculate_forces
     double press_vir_bnd;       //!< bonded (bond + angle + dihedral) virial contribution to the pressure, set in @ref calculate_forces

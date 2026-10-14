@@ -12,6 +12,8 @@
 #include "fileoutput.h"
 #include "force_test.h"
 #include "analysis.h"
+#include "velocity.h"
+#include "slab.h"
 
 static void thermo(struct Parameters *p, struct Vectors *v, size_t step,
                    double time, double U, double K)
@@ -72,6 +74,10 @@ int main(void)
     for (size_t i=0;i<p.num_part;++i) K+=0.5*p.mass[v.type[i]]*v3_dot(v.v[i],v.v[i]);
     thermo(&p,&v,step,time,U,K);
     analysis_start(&p,&v);
+    struct VelocityAnalysis velocity;
+    velocity_start(&p,&velocity);
+    struct SlabAnalysis slab;
+    slab_start(&p,&slab);
     while (step<p.num_dt_steps) {
         ++step; time=step*p.dt;
         update_velocities_half_dt(&p,&n,&v);
@@ -81,11 +87,15 @@ int main(void)
         U=calculate_forces(&p,&n,&v);
         K=update_velocities_half_dt(&p,&n,&v);
         analysis_update(&p,&v,step);
+        velocity_update(&p,&v,&velocity,step);
+        slab_update(&p,&v,&slab,step);
         if (p.num_dt_pdb && step%p.num_dt_pdb==0) record_trajectories_pdb(0,&p,&v,time);
         if (p.num_dt_restart && step%p.num_dt_restart==0) save_restart(&p,&v);
         if (step%p.num_dt_output==0) thermo(&p,&v,step,time,U,K);
     }
     analysis_finish(&p,&v);
+    velocity_finish(&p,&velocity);
+    slab_finish(&p,&slab);
     save_restart(&p,&v);
     free_memory(&v,&n);
     return 0;

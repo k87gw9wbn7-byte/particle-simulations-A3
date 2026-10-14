@@ -1,0 +1,9 @@
+{
+  "total_steps": 120000,
+  "total_time": 4800.0,
+  "discard_time": 800.0,
+  "candidate_steady_time": 600.0,
+  "reference_translation": 0.024937655860348684,
+  "minority_A_in_B": 0.04057983149033847,
+  "minority_B_in_A": 0.04071275536385034
+}
