@@ -1,0 +1,49 @@
+{
+  "case": "check",
+  "tag": "d_chain_check",
+  "chain_length": 5,
+  "aab": 28,
+  "dt": 0.04,
+  "steps": 60000,
+  "equil": 20000,
+  "block": 2500,
+  "sample": 50,
+  "seed": 23,
+  "kT": 1,
+  "C": 2,
+  "L": [
+    20,
+    10,
+    10
+  ],
+  "num_part": 6000,
+  "compile_command": [
+    "gcc",
+    "-std=c11",
+    "-O3",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror",
+    "-I",
+    "/Users/thierryquintius/Documents/Codex/2026-10-15/ca/outputs/A3_PartD/code",
+    "/Users/thierryquintius/Documents/Codex/2026-10-15/ca/outputs/A3_PartD/code/chainstats.c",
+    "/Users/thierryquintius/Documents/Codex/2026-10-15/ca/outputs/A3_PartD/code/tests/test_chainstats.c",
+    "-lm",
+    "-o",
+    "/Users/thierryquintius/Documents/Codex/2026-10-15/ca/outputs/A3_PartD/build/d_chain_check"
+  ],
+  "run_command": [
+    "/Users/thierryquintius/Documents/Codex/2026-10-15/ca/outputs/A3_PartD/build/d_chain_check"
+  ],
+  "working_directory": "/Users/thierryquintius/Documents/Codex/2026-10-15/ca/outputs/A3_PartD/code",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "machine": "macOS-27.0.1-arm64-arm-64bit",
+  "utc_finished": "2026-10-15T08:11:23.345494+00:00",
+  "run_seconds": 0.4546680409999999,
+  "returncode": 0,
+  "source_sha256": {
+    "code/chainstats.c": "50801e46e4ea6716bc6282b4e655632251891ce2b3a2fa71ff30f9ee67c10f87",
+    "code/tests/test_chainstats.c": "073fed5c6bc09d562b9fb81aa5c1c04ab2ccbf299afe6ed5e633af4f8f254778"
+  }
+}

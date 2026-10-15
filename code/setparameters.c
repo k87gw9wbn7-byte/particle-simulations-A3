@@ -64,6 +64,32 @@
 #define C_PDB 5000
 #endif
 
+/* Part D: 1=homogeneous chain fluid, 2=separated blend. */
+#ifndef D_CASE
+#define D_CASE (-1)
+#endif
+#ifndef D_N
+#define D_N 5
+#endif
+#ifndef D_AAB
+#define D_AAB 25.0
+#endif
+#ifndef D_STEPS
+#define D_STEPS 60000
+#endif
+#ifndef D_EQUIL
+#define D_EQUIL 20000
+#endif
+#ifndef D_BLOCK
+#define D_BLOCK 5000
+#endif
+#ifndef D_SEED
+#define D_SEED 23
+#endif
+#ifndef D_PREFIX
+#define D_PREFIX "../data/d1"
+#endif
+
 /* Edit here, then recompile. Default: a short Part A smoke test, NOT a
  * production result for B-D. All quantities are in DPD reduced units. */
 void set_parameters(struct Parameters *p)
@@ -168,6 +194,30 @@ void set_parameters(struct Parameters *p)
         snprintf(p->filename_xyz,sizeof p->filename_xyz,"%s",C_PREFIX);
         snprintf(p->analysis_prefix,sizeof p->analysis_prefix,"%s",C_PREFIX);
         snprintf(p->restart_out_filename,sizeof p->restart_out_filename,"%s.restart",C_PREFIX);
+    }
+    if (D_CASE >= 1) {
+        if (D_CASE > 2 || B_CASE >= 0 || C_CASE >= 1 || D_N < 2) {
+            fprintf(stderr,"Select D_CASE 1..2 and D_N>=2 without B/C overrides.\n");
+            exit(EXIT_FAILURE);
+        }
+        p->L = D_CASE == 1 ? v3(10,10,10) : v3(20,10,10);
+        p->num_part = D_CASE == 1 ? 3000 : 6000;
+        p->chain_length = D_N; p->fraction_A = 0.5;
+        p->separated_start = D_CASE == 2; p->seed = D_SEED;
+        p->conservative_on = p->thermostat_on = 1;
+        p->a[pair_index(0,0)] = p->a[pair_index(1,1)] = 25;
+        p->a[pair_index(0,1)] = D_CASE == 1 ? 25 : D_AAB;
+        p->dt = 0.04; p->num_dt_steps = D_STEPS; p->equil_steps = D_EQUIL;
+        p->sample_steps = 50; p->block_steps = D_BLOCK;
+        p->num_dt_output = 1000; p->num_dt_pdb = D_STEPS;
+        p->num_dt_restart = 0; p->load_restart = 0;
+        p->analysis_enabled = p->velocity_enabled = 0;
+        p->slab_enabled = D_CASE == 2; p->profile_dr = 0.25;
+        snprintf(p->filename_csv,sizeof p->filename_csv,"%s_thermo",D_PREFIX);
+        snprintf(p->filename_pdb,sizeof p->filename_pdb,"%s",D_PREFIX);
+        snprintf(p->filename_xyz,sizeof p->filename_xyz,"%s",D_PREFIX);
+        snprintf(p->analysis_prefix,sizeof p->analysis_prefix,"%s",D_PREFIX);
+        snprintf(p->restart_out_filename,sizeof p->restart_out_filename,"%s.restart",D_PREFIX);
     }
     validate_parameters(p);
 }

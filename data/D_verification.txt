@@ -1,0 +1,5 @@
+PASS: 18 read-only task cells unchanged from cloned notebook
+PASS: all code cells executed without saved errors; markdown images present
+PASS: all 12 production systems completed; source hashes match; thermodynamics finite and complete
+NOTE: these checks supplement, and do not replace, the course submission validator.
+PASS: all 9 Part D figures embedded in notebook outputs; HTML embeds images.

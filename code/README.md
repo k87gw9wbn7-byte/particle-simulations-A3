@@ -110,3 +110,20 @@ The included HTML was exported with nbconvert. The course's nb2html.py and
 check_my_submission.py were not supplied here. Use both official helpers on the
 finished assignment, as the notebook instructs. No official submission-checker
 pass is claimed.
+
+## Part D extension (2026-10-15)
+
+`chainstats.c/.h` samples the mean squared end-to-end vector and bond length
+in time blocks. End-to-end vectors are unwrapped by summing consecutive
+minimum-image bond vectors, not by applying a minimum image to the endpoints.
+`main.c` calls the sampler after the completed velocity-Verlet step.
+
+`setparameters.c` adds D_CASE=1 (homogeneous) and D_CASE=2 (separated blend),
+with D_N, D_AAB, D_STEPS, D_EQUIL, D_BLOCK, D_SEED and D_PREFIX overrides.
+The original default and B/C settings retain their behaviour. Use
+`python3 scripts/run_d.py` from the package root to select a D run; see
+`RUN_LOG_PartD.md` for the complete required sequence.
+
+`tests/test_chainstats.c` tests the periodic unwrapping edge case.
+Run `python3 scripts/run_d.py check --name d_chain_check` from the root.
+The added sampler does not modify positions, forces, velocities or noise.
