@@ -1,0 +1,86 @@
+[
+  {
+    "tag": "d1",
+    "file": "D1_snapshot.png",
+    "renderer": "OVITO OSPRay",
+    "ovito_version": "3.14.1",
+    "source": "d1.pdb",
+    "frame": 1,
+    "frames": 2,
+    "beads": 3000,
+    "chain_length": 5,
+    "aAB": 25,
+    "time": 2400.0,
+    "box": [
+      10.0,
+      10.0,
+      10.0
+    ],
+    "bonds_shown": true,
+    "A_color": "blue",
+    "B_color": "orange"
+  },
+  {
+    "tag": "d_n3_a28",
+    "file": "D2_snapshot_N3.png",
+    "renderer": "OVITO OSPRay",
+    "ovito_version": "3.14.1",
+    "source": "d_n3_a28.pdb",
+    "frame": 1,
+    "frames": 2,
+    "beads": 6000,
+    "chain_length": 3,
+    "aAB": 28,
+    "time": 2400.0,
+    "box": [
+      20.0,
+      10.0,
+      10.0
+    ],
+    "bonds_shown": false,
+    "A_color": "blue",
+    "B_color": "orange"
+  },
+  {
+    "tag": "d_n5_a28",
+    "file": "D2_snapshot_N5.png",
+    "renderer": "OVITO OSPRay",
+    "ovito_version": "3.14.1",
+    "source": "d_n5_a28.pdb",
+    "frame": 1,
+    "frames": 2,
+    "beads": 6000,
+    "chain_length": 5,
+    "aAB": 28,
+    "time": 2400.0,
+    "box": [
+      20.0,
+      10.0,
+      10.0
+    ],
+    "bonds_shown": false,
+    "A_color": "blue",
+    "B_color": "orange"
+  },
+  {
+    "tag": "d_n10_a28",
+    "file": "D2_snapshot_N10.png",
+    "renderer": "OVITO OSPRay",
+    "ovito_version": "3.14.1",
+    "source": "d_n10_a28.pdb",
+    "frame": 1,
+    "frames": 2,
+    "beads": 6000,
+    "chain_length": 10,
+    "aAB": 28,
+    "time": 2400.0,
+    "box": [
+      20.0,
+      10.0,
+      10.0
+    ],
+    "bonds_shown": false,
+    "A_color": "blue",
+    "B_color": "orange"
+  }
+]

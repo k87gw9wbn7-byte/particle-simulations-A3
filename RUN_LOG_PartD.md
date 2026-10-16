@@ -110,11 +110,21 @@ quantity, with reblocking factors 1,2,4. The largest supported estimated error
 is retained. Correlation, window, drift, symmetry and slab diagnostics are
 saved in the D tables. A warning calls for investigation, not automatic acceptance.
 
-The D snapshots are plotted from final simulated PDB coordinates using
-matplotlib. They are not OVITO screenshots. C/O labels mean bead types A/B,
-not chemical carbon/oxygen. The files can also be opened in OVITO; D1's black
-bonds in the rendered image connect consecutive beads, omitting boundary-spanning
-segments rather than drawing them through the periodic box.
+The four D snapshots are now rendered with OVITO/OSPRay 3.14.1 from the
+same saved final PDB frames, without rerunning or modifying the simulations.
+Blue denotes A and orange denotes B. D1 includes chain bonds built from the
+consecutive bead connectivity, with minimum-image periodic shifts. D2 shows
+beads coloured by type. Render provenance is in
+`data/D_ovito_render_manifest.json`. Regenerate with:
+
+```sh
+QT_QPA_PLATFORM=offscreen python3 scripts/render_d_ovito.py
+```
+
+This additional rendering step requires `ovito==3.14.1`. Existing numerical
+analysis only loads the cached images and does not require OVITO. The former
+Matplotlib snapshots also used the actual final coordinates; this update changes
+the renderer and the captions, not the simulation data or numerical conclusions.
 
 The comparison uses the analytic published Eq. (27), not invented digitized
 Fig. 8 data; the source and convention are in `data/reference/D_reference.md`.

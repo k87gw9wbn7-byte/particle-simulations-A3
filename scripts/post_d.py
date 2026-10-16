@@ -35,30 +35,15 @@ def print_table(rows,keys):
     for row in rows:print(' | '.join(f'{row[k]:.6g}' if isinstance(row[k],(float,np.floating)) else str(row[k]) for k in keys))
 
 def snapshot(t,name,chains=False):
-    # The C writer stores the initial and final configurations; use the final one.
-    xyz=[];types=[];time=None
-    for line in (DATA/f'{t}.pdb').read_text().splitlines():
-        if line.startswith('MODEL'):xyz=[];types=[]
-        elif line.startswith('REMARK TIME'):time=float(line.split('=')[1])
-        elif line.startswith('HETATM'):
-            xyz.append([float(line[30:38]),float(line[38:46]),float(line[46:54])]);types.append(line[12:16].strip())
-    m=manifest(t);r=np.array(xyz);types=np.array(types);L=np.array(m['L'])
-    if len(r)!=m['num_part'] or not np.isclose(time,m['steps']*m['dt']):raise ValueError('Missing final snapshot')
-    fig=plt.figure(figsize=(9,5));ax=fig.add_subplot(111,projection='3d')
-    for lab,color in [('C','#2577bb'),('O','#df6c31')]:
-        z=r[types==lab];ax.scatter(*z.T,s=5 if chains else 8,c=color,alpha=.55 if chains else .8,label='A' if lab=='C' else 'B',depthshade=True,rasterized=True)
-    if chains:
-        from mpl_toolkits.mplot3d.art3d import Line3DCollection
-        segments=[];n=m['chain_length']
-        for c in range(len(r)//n):
-            for j in range(n-1):
-                p,q=r[c*n+j:c*n+j+2]
-                if np.all(np.abs(q-p)<L/2):segments.append([p,q])
-        ax.add_collection3d(Line3DCollection(segments,colors='black',linewidths=.45,alpha=.55))
-    ax.set(xlim=(0,L[0]),ylim=(0,L[1]),zlim=(0,L[2]),xlabel='x / rc',ylabel='y / rc',zlabel='z / rc')
-    ax.set_box_aspect(L);ax.view_init(elev=21,azim=-65);ax.legend(loc='upper right')
-    ax.set_title(f'N={m["chain_length"]}, aAB={m["aab"]:g}, t={time:g}; final simulated coordinates')
-    savefig(fig,name)
+    # OVITO renders the saved final PDB coordinates; reuse those verified images.
+    # Regenerate explicitly with: python scripts/render_d_ovito.py
+    path=DATA/name
+    if not path.exists():raise FileNotFoundError(f'{path}: run scripts/render_d_ovito.py first')
+    try:
+        from IPython import get_ipython
+        from IPython.display import Image, display
+        if get_ipython() is not None:display(Image(filename=str(path)))
+    except ImportError:pass
 
 def d1():
     m=manifest('d1');b=load('d1_chain_blocks.csv');v=b['Re2'][b['production']==1]
